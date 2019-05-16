@@ -19,8 +19,14 @@ const ProductSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
-});
+    files: [{type: mongoose.Schema.Types.ObjectId, ref: "File" }]
+    },
+
+    {
+        timestamps: true
+    }
+);
 
 ProductSchema.plugin(mongoosePaginate);
 
-mongoose.model('Product', ProductSchema);
+module.exports = mongoose.model('Product', ProductSchema);

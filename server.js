@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require ('mongoose');
 const requireDir = require('require-dir');
+const path = require('path');
 
 //iniciando o app
 const app = express();
@@ -17,5 +18,6 @@ requireDir('./src/models');
 
 //Rotas
 app.use('/api', require("./src/Routes"));
+app.use('/files', express.static(path.resolve(__dirname,'..','tmp')));
 
-app.listen(3001);
+app.listen(process.env.PORT || 3001); 
