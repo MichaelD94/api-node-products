@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 
 const Product = mongoose.model('Product');
+const File = require ('../models/File');
 
 module.exports = {
     async index(req, res) {
         const { page = 1 } = req.query;
-        const products = await Product.paginate({/* condições where e etc*/}, {page, limit: 10 });
-
+        const products = await Product.paginate({/* condições where e etc*/}, {page, limit: 10 });        
         return res.json(products);
     },
 
@@ -31,8 +31,11 @@ module.exports = {
     },
 
     async destroy(req, res){
-        await Product.findByIdAndRemove(req.params.id);
+        const product = await Product.findById(req.params.id);
 
+        await File.findByIdAndRemove(product.files);
+        await Product.findByIdAndRemove(req.params.id);
+        
         return res.send();
     }
 };
