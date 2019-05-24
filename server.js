@@ -12,12 +12,13 @@ app.use(cors());
 //iniciando o DB
 mongoose.connect(
     'mongodb://localhost:27017/apinode',
-     { useNewUrlParser: true }
-);
+     { useNewUrlParser: true },     
+     );
+mongoose.set('useCreateIndex', true);
 requireDir('./src/models');
 
 //Rotas
 app.use('/api', require("./src/Routes"));
 app.use('/files', express.static(path.resolve(__dirname,'tmp','uploads')));
 
-app.listen(process.env.PORT || 3001); 
+app.listen(process.env.PORT || 3001);
