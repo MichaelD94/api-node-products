@@ -11,7 +11,10 @@ module.exports = {
     },
 
     async show(req, res){
-        const product = await Product.findById(req.params.id);
+        const product = await Product.findById(req.params.id).populate({
+            path: 'files',
+            options: { sort : {createdAt: -1 } }
+        });
 
         return res.json(product);
     },
