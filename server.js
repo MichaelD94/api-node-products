@@ -11,7 +11,7 @@ app.use(cors());
 
 //iniciando o DB
 mongoose.connect(
-    'mongodb://localhost:27017/apinode',
+    'mongodb+srv://dbMD:35636896@api-products-ddyjh.mongodb.net/test?retryWrites=true&w=majority',
      { useNewUrlParser: true },     
      );
 mongoose.set('useCreateIndex', true);

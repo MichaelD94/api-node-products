@@ -14,7 +14,7 @@ module.exports = {
         const product = await Product.findById(req.params.id).populate({
             path: 'files',
             options: { sort : {createdAt: -1 } }
-        });
+        })
 
         return res.json(product);
     },
